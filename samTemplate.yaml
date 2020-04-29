@@ -42,5 +42,5 @@ Resources:
       Environment:
         Variables:
           REGION: us-east-1
-    SrcBucket:
-      Type: AWS::S3::Bucket
+  SrcBucket:
+    Type: AWS::S3::Bucket
