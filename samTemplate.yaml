@@ -38,7 +38,7 @@ Resources:
           Type: S3
           Properties:
             Bucket: !Ref SrcBucket
-            Method: s3:ObjectCreated:*
+            Events: s3:ObjectCreated:*
       Environment:
         Variables:
           REGION: us-east-1
