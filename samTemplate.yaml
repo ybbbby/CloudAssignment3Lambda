@@ -43,4 +43,4 @@ Resources:
         Variables:
           REGION: us-east-1
     SrcBucket:
-      Type: arn:aws:s3:::photosalbums
+      Type: AWS::S3::Bucket
