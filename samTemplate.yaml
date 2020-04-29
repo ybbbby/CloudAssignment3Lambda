@@ -1,0 +1,46 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: CD Demo Lambda
+Resources:
+  HaoLambda:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      FunctionName: imageProcessor_D
+      Handler: imageProcessor.lambda_handler
+      Runtime: python3.7
+      CodeUri: .
+      Description: 'Hao lambda'
+      MemorySize: 128
+      Timeout: 30
+      Role: 'arn:aws:iam::562498190142:role/service-role/imageProcessor-role-rtmfo125'
+      Events:
+        searchAPI:
+          Type: Api
+          Properties:
+            Path: /search
+            Method: get
+      Environment:
+        Variables:
+          REGION: us-east-1
+  DuLambda:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      FunctionName: LF1_D
+      Handler: LF1.lambda_handler
+      Runtime: python3.7
+      CodeUri: .
+      Description: 'Du lambda'
+      MemorySize: 128
+      Timeout: 30
+      Role: 'arn:aws:iam::562498190142:role/service-role/Index-photos'
+      Events:
+        S3Trigger:
+          Type: S3
+          Properties:
+            Bucket: !Ref SrcBucket
+            Method: s3:ObjectCreated:*
+      Environment:
+        Variables:
+          REGION: us-east-1
+    SrcBucket:
+      Type: arn:aws:s3:::photosalbums
